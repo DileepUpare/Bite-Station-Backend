@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import myUserRoute from "./Routes/UserRoute";
 import { v2 as cloudinary } from "cloudinary";
 import RestaurantRoute from "./Routes/RestaurantRoute";
+import searchRestaurantRoute from "./Routes/SearchRestaurantRoute";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
 .then(()=> console.log("Connected To MongoDB!"));
@@ -25,6 +26,8 @@ app.get("/health", async(req:Request, res:Response)=>{
 
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant",RestaurantRoute);
+app.use("/api/restaurant", searchRestaurantRoute); //Its a public route, user doesnt have to be logged in to use it.
+
 
 app.get("/test", async (req: Request, res: Response)=>{
      res.json({message: "Hello!"});

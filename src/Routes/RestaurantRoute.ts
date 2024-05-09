@@ -15,6 +15,10 @@ const upload = multer({
     },
 });
 
+router.get("/order", jwtCheck, jwtParse, RestaurantController.getMyRestaurantOrders);
+
+router.patch("/order/:orderId/status", jwtCheck, jwtParse, RestaurantController.updateOrderStatus)
+
 router.get("/", jwtCheck, jwtParse, RestaurantController.getMyRestaurant);
 
 router.post("/", upload.single("imageFile"),
